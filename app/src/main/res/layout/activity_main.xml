@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Pantalla del jugador 1 -->
+
+    <!-- Botón 1 -->
+
+
+    <!-- Division de pantalla -->
+
+    <View
+        android:id="@+id/pantalla_j1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#907761"
+        app:layout_constraintBottom_toTopOf="@id/divisor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="1" />
+
+    <Button
+        android:id="@+id/boton_j1"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/round_button"
+        android:contentDescription="Boton J1"
+        android:onClick="moverCaballoJ1"
+        app:layout_constraintBottom_toTopOf="@id/divisor"
+        app:layout_constraintEnd_toEndOf="@id/pantalla_j1"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@id/pantalla_j1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/divisor"
+        android:layout_width="0dp"
+        android:layout_height="6dp"
+        android:background="@drawable/meta"
+        app:layout_constraintBottom_toTopOf="@id/pantalla_j2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Pantalla del jugador 2 -->
+
+    <View
+        android:id="@+id/pantalla_j2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#907761"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="1" />
+
+    <!-- Botón 2 -->
+
+    <Button
+        android:id="@+id/boton_j2"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:contentDescription="Boton J2"
+        android:background="@drawable/round_button"
+        android:onClick="moverCaballoJ2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/pantalla_j2"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@id/pantalla_j2"
+        app:layout_constraintTop_toBottomOf="@id/divisor"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/nom_j2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JUGADOR2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/boton_j2"
+        app:layout_constraintEnd_toEndOf="@+id/pantalla_j2"
+        app:layout_constraintStart_toStartOf="@+id/pantalla_j2"
+        app:layout_constraintTop_toTopOf="@+id/pantalla_j2"
+        app:layout_constraintVertical_bias="0.62" />
+
+    <TextView
+        android:id="@+id/nom_j1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="-180"
+        android:text="JUGADOR1"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/divisor"
+        app:layout_constraintEnd_toEndOf="@+id/pantalla_j1"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/pantalla_j1"
+        app:layout_constraintTop_toBottomOf="@+id/boton_j1" />
+
+    <ImageView
+        android:id="@+id/caballoJ2"
+        android:layout_width="110dp"
+        android:layout_height="93dp"
+        android:layout_below="@id/boton_j2"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/caballo1" />
+
+    <ImageView
+        android:id="@+id/caballoJ1"
+        android:layout_width="110dp"
+        android:layout_height="93dp"
+        android:layout_above="@id/boton_j1"
+        android:layout_centerHorizontal="true"
+        android:rotation="-180"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/caballo1" />
+
+    <Button
+        android:id="@+id/btn_pausa"
+        android:layout_width="65dp"
+        android:layout_height="48dp"
+        android:background="@drawable/pausa1"
+        android:contentDescription="Botón de pausa"
+        app:layout_constraintBottom_toTopOf="@+id/boton_j2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/divisor"
+        app:layout_constraintTop_toBottomOf="@+id/boton_j1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
