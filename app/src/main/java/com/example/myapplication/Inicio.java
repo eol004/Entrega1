@@ -16,14 +16,11 @@ public class Inicio extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Llama al método que cerrará la pantalla de bienvenida después de 5 segundos
-                cerrarPantallaBienvenida();
+                Intent intent = new Intent(Inicio.this, Registro.class);
+                startActivity(intent);
+                finish();
             }
         }, 5000); // 5000 milisegundos = 5 segundos
     }
-    private void cerrarPantallaBienvenida(){
-        Intent intent = new Intent(this, InicioSesion.class);
-        startActivity(intent);
-        finish();
-    }
+
 }

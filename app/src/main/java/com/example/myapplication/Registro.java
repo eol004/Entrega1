@@ -21,7 +21,8 @@ public class Registro extends AppCompatActivity implements BlankFragment.Listene
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), InicioSesion.class);
-
+                startActivity(intent);
+                finish();
             }
         });
 

@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/logosinf"
+        android:icon="@drawable/icono"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
@@ -16,10 +16,34 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Registro"
+            android:parentActivityName=".Inicio">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Inicio" />
+        </activity>
+
+        <activity
+            android:name=".InicioSesion"
+            android:parentActivityName=".Registro">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Registro" />
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".Registro">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Registro" />
+        </activity>
+
     </application>
 
 </manifest>
