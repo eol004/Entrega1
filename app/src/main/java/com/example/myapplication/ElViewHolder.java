@@ -11,9 +11,9 @@ public class ElViewHolder extends RecyclerView.ViewHolder {
     public TextView texto;
     public ImageView trago;
 
-    public ElViewHolder(@NonNull View itemView) {
+    public ElViewHolder(View itemView) {
         super(itemView);
         texto = itemView.findViewById(R.id.texto);
-        trago = itemView.findViewById(R.id.foto1);
+        trago = itemView.findViewById(R.id.trago);
     }
 }

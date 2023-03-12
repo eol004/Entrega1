@@ -13,14 +13,14 @@ public class ElAdaptadorRecycler extends RecyclerView.Adapter<ElViewHolder> {
     private int[] lasimagenes;
 
     public ElAdaptadorRecycler (String[] nombres, int[] imagenes){
-        losnombres=nombres;
-        lasimagenes=imagenes;
+        this.losnombres=nombres;
+        this.lasimagenes=imagenes;
     }
 
     @NonNull
     @Override
     public ElViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View elLayoutDeCadaItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.trago_layout, null);
+        View elLayoutDeCadaItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.trago_layout, parent);
         ElViewHolder evh = new ElViewHolder(elLayoutDeCadaItem);
         return evh;
     }
