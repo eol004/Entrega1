@@ -12,10 +12,6 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".Tragos"
-            android:exported="false">
-        </activity>
-        <activity
             android:name=".Inicio"
             android:exported="true">
             <intent-filter>
@@ -39,11 +35,18 @@
                 android:value=".Registro" />
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:parentActivityName=".Registro">
+            android:name=".Invitados"
+            android:parentActivityName=".InicioSesion">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Registro" />
+                android:value=".InicioSesion" />
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".Invitados">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Invitados" />
         </activity>
     </application>
 
