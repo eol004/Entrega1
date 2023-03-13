@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,32 +31,41 @@ public class InicioSesion extends AppCompatActivity {
                 String us = usuario.getText().toString();
                 String con = contr.getText().toString();
 
+                /** Basado en el código extraido de "El informatico ibero"
+                 * link: https://mpersonales.blogspot.com/2016/05/login-con-base-de-datos-sqlite-en.html
+                 * Autor: Raul Tamani
+                 * Modificado por Estefania Oñate para comprobar el inicio de sesión
+                 */
+
                 //Comprobar que en la base de datos coinciden los valores de usuario y contraseña
-                Cursor ca = miBaseDeDatos.getReadableDatabase().rawQuery("SELECT COUNT(*) FROM Usuarios", null);
-                if (ca != null && ca.moveToFirst()) {
-                    int count = ca.getInt(0);
-                    Log.d("TAG", "Número de registros en la tabla: " + count);
-                }
-
-                Cursor c = miBaseDeDatos.getReadableDatabase().rawQuery("SELECT COUNT(*) FROM Usuarios WHERE Nombre = ? AND Contrasena = ?", new String[]{us, con}); //https://www.develou.com/android-sqlite-bases-de-datos/#Cursores_en_SQLite
-                if (c.getCount() > 0) { //Si hay registro pasar a Invitados
-                    Intent intent = new Intent(InicioSesion.this, Invitados.class);
-                    //Mandar a Invitados el usuario
-                    intent.putExtra("usuario", us);
-                    startActivity(intent);
-                    finish();
-                } else { //Mensaje de error si el usuario y la contraseña no coincide
-                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                    builder.setTitle("Inicio de sesión fallido");
-                    builder.setMessage("Usuario o contraseña incorrectos. ¡Vuelve a intentarlo! :) ");
-                    builder.setPositiveButton("Nuevo intento", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss(); //https://es.stackoverflow.com/questions/130576/cerrar-alertdialog
+                Cursor c = miBaseDeDatos.getReadableDatabase().rawQuery("SELECT Usuario, Contrasena FROM Usuarios WHERE Usuario ='"+us+"'AND Contrasena ='"+con+"'", null); //https://www.develou.com/android-sqlite-bases-de-datos/#Cursores_en_SQLite
+                try {
+                    /*Condicional if preguntamos si cursor tiene algun dato*/
+                    if(c.moveToFirst()){ //capturamos los valores del cursos y lo almacenamos en variable
+                        String usua=c.getString(0);
+                        String pass=c.getString(1);
+                        //preguntamos si los datos ingresados son iguales
+                        if (us.equals(usua)&&con.equals(pass)){
+                            //si son iguales entonces va a Invitados.class
+                            Intent intent=new Intent(InicioSesion.this, Invitados.class);
+                            //Mandar a Invitados el usuario
+                            intent.putExtra("usuario", us);
+                            //lanzamos la actividad
+                            startActivity(intent);
+                            finish();
                         }
-
-                    });
+                    }//si la primera condicion no cumple entonces que envie un mensaje toast
+                    else {
+                        Toast toast=Toast.makeText(InicioSesion.this,"Datos incorrectos",Toast.LENGTH_LONG);
+                        //mostramos el toast
+                        toast.show();
+                    }
+                } catch (Exception e) {//capturamos los errores que hubieran
+                    Toast toast=Toast.makeText(InicioSesion.this,"Error" + e.getMessage(),Toast.LENGTH_LONG);
+                    //mostramos el mensaje
+                    toast.show();
                 }
+                c.close();
             }
         });
     }

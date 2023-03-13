@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -30,7 +31,7 @@ public class Registro extends AppCompatActivity implements BlankFragment.Listene
         btn_registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                miBaseDeDatos.anadirUsuario(nombre.getText().toString(), usuario.getText().toString(), contr.getText().toString(), 0);
+                miBaseDeDatos.anadirUsuario(usuario.getText().toString(), nombre.getText().toString(), contr.getText().toString(), 0);
             }
         });
         //Cuando se de al boton de iniciar sesion lleva a la pantalla de inicio sesión

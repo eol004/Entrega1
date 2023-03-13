@@ -80,8 +80,9 @@ public class MainActivity extends AppCompatActivity {
             }
             public void onFinish() {
                 // Quitar la cuenta atras
-                nom_j1.setText(" ");
-                nom_j2.setText(" ");
+                Bundle extras = getIntent().getExtras();
+                nom_j1.setText(extras.getString("usuario"));
+                nom_j2.setText(extras.getString("invitado"));
                 // Habilitar los botones
                 boton_j1.setEnabled(true);
                 boton_j2.setEnabled(true);
