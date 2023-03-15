@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,22 +18,34 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Invitados extends AppCompatActivity {
     private TextView nombre;
     private EditText nomInv;
+    String nomCompleto, nomUsuario;
+    miBD miBaseDeDatos = new miBD(this, "miBaseDeDatos", null, 1);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.invitados);
         nombre = findViewById(R.id.nomusuarios);
-        String usuario;
 
         //Recoger la variable usuario de InicioSesion para sacar el nombre de ese usuario
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
-            nombre.setText(extras.getString("usuario"));
+
+            nomUsuario = extras.getString("usuario");
+
+            //Base de Datos para obtener el nombre completo
+            SQLiteDatabase bd = miBaseDeDatos.getReadableDatabase();
+            String[] argumento = new String[]{nomUsuario};
+            Cursor cursor = bd.rawQuery("SELECT Nombre FROM Usuarios WHERE Usuario = ?", argumento);
+
+            //Recoge el valor
+            if (cursor.moveToNext()){
+                nomCompleto = cursor.getString(0);
+            }
+
+            nombre.setText(nomCompleto);
         }
-        //Base de datos
-        miBD miBaseDeDatos = new miBD(this, "miBaseDeDatos", null, 1);
-        SQLiteDatabase db = miBaseDeDatos.getReadableDatabase();
 
         //Editar TextView con el nombre del usuario que ha iniciado sesión
         nomInv = findViewById(R.id.invitado);
@@ -45,7 +58,7 @@ public class Invitados extends AppCompatActivity {
                     miBaseDeDatos.anadirJugadores(nomInv.getText().toString(), 0);
                     Intent intent=new Intent(Invitados.this, MainActivity.class);
                     //Mandar al juego el usuario
-                    intent.putExtra("usuario", extras.getString("usuario"));
+                    intent.putExtra("usuario", nomCompleto);
                     //Mandar al juego el invitado
                     intent.putExtra("invitado", nomInv.getText().toString());
                     //lanzamos la actividad

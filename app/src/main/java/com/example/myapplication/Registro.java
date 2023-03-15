@@ -31,8 +31,12 @@ public class Registro extends AppCompatActivity implements BlankFragment.Listene
         btn_registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                miBaseDeDatos.anadirUsuario(usuario.getText().toString(), nombre.getText().toString(), contr.getText().toString(), 0);
-            }
+                try {
+                    miBaseDeDatos.anadirUsuario(usuario.getText().toString(), nombre.getText().toString(), contr.getText().toString(), 0);
+                    Toast.makeText(Registro.this, "Registro correcto", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(Registro.this,"Error" + e.getMessage(),Toast.LENGTH_LONG).show();;
+                }}
         });
         //Cuando se de al boton de iniciar sesion lleva a la pantalla de inicio sesión
         Button btn_inicioses = findViewById(R.id.btn_inicioses_reg);
@@ -41,7 +45,6 @@ public class Registro extends AppCompatActivity implements BlankFragment.Listene
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), InicioSesion.class);
                 startActivity(intent);
-                finish();
             }
         });
 

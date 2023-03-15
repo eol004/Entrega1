@@ -13,6 +13,7 @@
         tools:targetApi="31">
         <activity
             android:name=".Inicio"
+            android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +23,7 @@
         </activity>
         <activity
             android:name=".Registro"
+            android:configChanges="orientation|screenSize"
             android:parentActivityName=".Inicio">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,10 +45,18 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Invitados">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Invitados" />
+                android:value=".Invitados"/>
+        </activity>
+        <activity
+            android:name=".Tragos"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
     </application>
 

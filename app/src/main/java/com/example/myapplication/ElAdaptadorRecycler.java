@@ -20,9 +20,8 @@ public class ElAdaptadorRecycler extends RecyclerView.Adapter<ElViewHolder> {
     @NonNull
     @Override
     public ElViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View elLayoutDeCadaItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.trago_layout, parent);
-        ElViewHolder evh = new ElViewHolder(elLayoutDeCadaItem);
-        return evh;
+        View elLayoutDeCadaItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.trago_layout, parent, false);
+        return new ElViewHolder(elLayoutDeCadaItem);
     }
 
     @Override
@@ -33,7 +32,7 @@ public class ElAdaptadorRecycler extends RecyclerView.Adapter<ElViewHolder> {
 
     @Override
     public int getItemCount() {
-        return losnombres.length;
+        return lasimagenes.length;
         //return 0;
     }
 }

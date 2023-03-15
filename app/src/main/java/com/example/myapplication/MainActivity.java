@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean ganaJ1;
     private boolean ganaJ2;
     private boolean empezar;
+    private String usuarioSesion;
     private TextView nom_j1;
     private TextView nom_j2;
 
@@ -47,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
         //TextView
         nom_j1 = findViewById(R.id.nom_j1);
         nom_j2 = findViewById(R.id.nom_j2);
+        //Nombre del usuario que ha iniciado sesion
+        Bundle extra = getIntent().getExtras();
+        if (extra != null){
+            usuarioSesion = extra.getString("usuario");
+            Log.d("LLEGADO", "Soy el usuario --> " + usuarioSesion);
+        }
 
         //Dialogo para empezar el juego
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
