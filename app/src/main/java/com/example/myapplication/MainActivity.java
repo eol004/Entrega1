@@ -4,6 +4,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView nom_j1;
     private TextView nom_j2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         //Botones
         boton_j1 = findViewById(R.id.boton_j1);
         boton_j2 = findViewById(R.id.boton_j2);
-        boton_pausa = findViewById(R.id.btn_pausa);
         //TextView
         nom_j1 = findViewById(R.id.nom_j1);
         nom_j2 = findViewById(R.id.nom_j2);
@@ -53,12 +55,13 @@ public class MainActivity extends AppCompatActivity {
         Bundle extra = getIntent().getExtras();
         if (extra != null){
             usuarioSesion = extra.getString("usuario");
-            Log.d("LLEGADO", "Soy el usuario --> " + usuarioSesion);
+            //Log.d("LLEGADO", "Soy el usuario --> " + usuarioSesion);
         }
 
         //Dialogo para empezar el juego
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Jugamos ya?");
+        builder.setCancelable(false);
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -68,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Intent intent=new Intent(MainActivity.this, InicioSesion.class);
+                //lanzamos la actividad
+                startActivity(intent);
                 finish(); //Cerrar la actividad si el usuario elige "No"
             }
         });
@@ -89,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 // Quitar la cuenta atras
                 Bundle extras = getIntent().getExtras();
-                nom_j1.setText(extras.getString("usuario"));
-                nom_j2.setText(extras.getString("invitado"));
+                nom_j1.setText(extras.getString("usuario")); //Usuario de la app (pantalla2)
+                nom_j2.setText(extras.getString("invitado")); //Invitado de la app (pantalla1)
                 // Habilitar los botones
                 boton_j1.setEnabled(true);
                 boton_j2.setEnabled(true);
@@ -98,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
     }
-
     public void moverCaballoJ1(){
         boton_j1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,12 +127,15 @@ public class MainActivity extends AppCompatActivity {
                         ganaJ2 = false;
                         nom_j1.setText("¡Ganaste!\n¡A repartir tragos!");
                         nom_j2.setText("¡Perdiste!\n¡A recibir tragos!");
-
-                        //Dialogo
-                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                        builder.setTitle("Fin del juego");
+                        //Mandar a Tragos el ganador
+                        Bundle extras = getIntent().getExtras();
+                        Intent intent=new Intent(MainActivity.this, Tragos.class);
+                        intent.putExtra("ganadorUsu", extras.getString("usuario"));
+                        intent.putExtra("perdedorInv", extras.getString("invitado"));
+                        startActivity(intent);
                     }
                 }
+
             }
         });
     }
@@ -155,40 +163,46 @@ public class MainActivity extends AppCompatActivity {
 
                         nom_j2.setText("¡Ganaste!\n¡A repartir tragos!");
                         nom_j1.setText("¡Perdiste!\n¡A recibir tragos!");
+                        //Mandar a Tragos el ganador y perdedor
+                        Bundle extras = getIntent().getExtras();
+                        Intent intent=new Intent(MainActivity.this, Tragos.class);
+                        intent.putExtra("ganadorInv", extras.getString("invitado"));
+                        intent.putExtra("perdedorUsu", extras.getString("usuario"));
+                        startActivity(intent);
+
                     }
                 }
+
             }
         });
     }
-
     public void jugar(){
         cuentaAtras();
         moverCaballoJ1();
         moverCaballoJ2();
     }
-
-    public void pausar(){
-        boton_pausa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Dialogo de pausa
-                AlertDialog.Builder builderP = new AlertDialog.Builder(getApplicationContext());
-                builderP.setMessage("Juego pausado. ¿Quieres reanudar el juego?");
-                builderP.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        jugar();
-                    }
-                });
-                builderP.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish(); //Cerrar la actividad si el usuario elige "No"
-                    }
-                });
-                AlertDialog dialog = builderP.create();
-                dialog.show();
-            }
-        });
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("posJ1", posJ1);
+        editor.putInt("posJ2", posJ2);
+        editor.putBoolean("ganaJ1", ganaJ1);
+        editor.putBoolean("ganaJ2", ganaJ2);
+        editor.putBoolean("empezar", empezar);
+        editor.putString("usuarioSesion", usuarioSesion);
+        editor.apply();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
+        posJ1 = prefs.getInt("posJ1", 0);
+        posJ2 = prefs.getInt("posJ2", 0);
+        ganaJ1 = prefs.getBoolean("ganaJ1", false);
+        ganaJ2 = prefs.getBoolean("ganaJ2", false);
+        empezar = prefs.getBoolean("empezar", false);
+        usuarioSesion = prefs.getString("usuarioSesion", "");
     }
 }

@@ -31,7 +31,6 @@ public class Invitados extends AppCompatActivity {
         //Recoger la variable usuario de InicioSesion para sacar el nombre de ese usuario
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
-
             nomUsuario = extras.getString("usuario");
 
             //Base de Datos para obtener el nombre completo

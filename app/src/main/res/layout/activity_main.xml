@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Pantalla del jugador 1 -->
-
-    <!-- Botón 1 -->
-
-
-    <!-- Division de pantalla -->
-
     <View
         android:id="@+id/pantalla_j1"
         android:layout_width="0dp"
@@ -131,17 +124,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/caballo1" />
-
-    <Button
-        android:id="@+id/btn_pausa"
-        android:layout_width="65dp"
-        android:layout_height="48dp"
-        android:background="@drawable/pausa1"
-        android:contentDescription="Botón de pausa"
-        app:layout_constraintBottom_toTopOf="@+id/boton_j2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/divisor"
-        app:layout_constraintTop_toBottomOf="@+id/boton_j1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

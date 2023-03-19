@@ -20,7 +20,7 @@ public class miBD extends SQLiteOpenHelper {
         //Tabla Usuarios
         sqLiteDatabase.execSQL("CREATE TABLE Usuarios(Usuario VARCHAR(255) PRIMARY KEY, Nombre VARCHAR(255), Contrasena VARCHAR(255), Tragos INTEGER)");
         //Tabla Jugadores
-        sqLiteDatabase.execSQL("CREATE TABLE Invitado(Jugador1 VARCHAR(255), Tragos INT)");
+        sqLiteDatabase.execSQL("CREATE TABLE Invitados(id INTEGER PRIMARY KEY AUTOINCREMENT, Jugador1 VARCHAR(255), Tragos INT)");
     }
 
     @Override
@@ -47,7 +47,35 @@ public class miBD extends SQLiteOpenHelper {
         nuevo.put("Jugador1", jugador1);
         nuevo.put("Tragos", trago);
         //Insercion
-        db.insert("Invitado", null, nuevo);
+        db.insert("Invitados", null, nuevo);
+        db.close();
+    }
+
+    public void anadirTragosPerdedorInv(String perdedorInv, int tragos){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Tragos", tragos);
+
+        String whereClause = "Jugador1 = ?";
+        String[] whereArgs = new String[] { perdedorInv };
+
+        // Actualizar los registros que cumplan la cláusula WHERE
+        int rowsAffected = db.update("Invitados", values, whereClause, whereArgs);
+        System.out.println(rowsAffected);
+        // Cerrar la conexión a la base de datos
+        db.close();
+    }
+    public void anadirTragosPerdedorUsu(String perdedorUsu, int tragos){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Tragos", tragos);
+
+        String whereClause = "Usuario = ?";
+        String[] whereArgs = new String[] { perdedorUsu };
+
+        // Actualizar los registros que cumplan la cláusula WHERE
+        int rowsAffected = db.update("Usuarios", values, whereClause, whereArgs);
+        // Cerrar la conexión a la base de datos
         db.close();
     }
 
