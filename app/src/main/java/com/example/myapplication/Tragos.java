@@ -1,20 +1,32 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.Manifest;
 
 
 public class Tragos extends AppCompatActivity {
     int numSeleccionTragos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //RECYCLERVIEW + CARDVIEW
@@ -86,7 +98,27 @@ public class Tragos extends AppCompatActivity {
         btn_jugarDeNuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Tragos.this, InicioSesion.class);
+                Intent intent = new Intent(Tragos.this, InicioSesion.class);
+                if (ContextCompat.checkSelfPermission(Tragos.this, Manifest.permission.POST_NOTIFICATIONS)!= PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Tragos.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 11);
+                }
+                NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationCompat.Builder elBuilder = new NotificationCompat.Builder(Tragos.this, "IdCanal");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel elCanal = new NotificationChannel("IdCanal", "NombreCanal", NotificationManager.IMPORTANCE_DEFAULT);
+                    elManager.createNotificationChannel(elCanal);
+                    elBuilder.setSmallIcon(android.R.drawable.stat_sys_warning)
+                            .setContentTitle("Nueva partida")
+                            .setContentText("Inicia sesión para una nueva partida.")
+                            .setVibrate(new long[]{0, 1000, 500, 1000})
+                            .setAutoCancel(true);
+
+                    elCanal.setDescription("Descripción del canal");
+                    elCanal.enableLights(true);
+                    elCanal.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+                    elCanal.enableVibration(true);
+                }
+                elManager.notify(1, elBuilder.build());
                 startActivity(intent);
             }
         });

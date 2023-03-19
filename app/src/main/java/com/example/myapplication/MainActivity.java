@@ -135,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
-
             }
         });
     }
@@ -180,29 +179,5 @@ public class MainActivity extends AppCompatActivity {
         cuentaAtras();
         moverCaballoJ1();
         moverCaballoJ2();
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("posJ1", posJ1);
-        editor.putInt("posJ2", posJ2);
-        editor.putBoolean("ganaJ1", ganaJ1);
-        editor.putBoolean("ganaJ2", ganaJ2);
-        editor.putBoolean("empezar", empezar);
-        editor.putString("usuarioSesion", usuarioSesion);
-        editor.apply();
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences prefs = getSharedPreferences("MisPreferencias", MODE_PRIVATE);
-        posJ1 = prefs.getInt("posJ1", 0);
-        posJ2 = prefs.getInt("posJ2", 0);
-        ganaJ1 = prefs.getBoolean("ganaJ1", false);
-        ganaJ2 = prefs.getBoolean("ganaJ2", false);
-        empezar = prefs.getBoolean("empezar", false);
-        usuarioSesion = prefs.getString("usuarioSesion", "");
     }
 }

@@ -6,32 +6,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#AB9680">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#AB9680">
-
+        android:padding="16dp">
         <TextView
-            android:id="@+id/titulo_is"
+            android:id="@+id/titulo_reg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="170dp"
-            android:text="¡Inicia sesión!"
+            android:layout_marginTop="32dp"
+            android:text="¡Registrate!"
             android:textColor="#333333"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/nomusuario_is"
+            android:id="@+id/usuario_reg"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="80dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="200dp"
             android:background="#FFFFFF"
             android:hint="Nombre de usuario"
             android:inputType="text"
@@ -40,37 +40,36 @@
             android:textColor="#333333"
             android:textColorHint="#171616"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/titulo_is"
+            app:layout_constraintBottom_toTopOf="@+id/fcontra_reg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contra_is"
+            app:layout_constraintTop_toBottomOf="@+id/nom_reg"
             app:layout_constraintVertical_bias="0.5" />
 
-
         <Button
-            android:id="@+id/btn_incioses"
+            android:id="@+id/btn_registrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="200dp"
             android:background="@drawable/round_button"
-            android:text="¡Comenzar!"
+            android:text="Registrarse"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contra_is" />
+            app:layout_constraintTop_toBottomOf="@id/contra_reg" />
 
         <EditText
-            android:id="@+id/contra_is"
+            android:id="@+id/contra_reg"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="80dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="200dp"
             android:background="#FFFFFF"
             android:hint="Contraseña"
             android:inputType="textPassword"
@@ -81,21 +80,41 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nomusuario_is" />
+            app:layout_constraintTop_toBottomOf="@+id/usuario_reg" />
+
+        <EditText
+            android:id="@+id/nom_reg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="200dp"
+            android:background="#FFFFFF"
+            android:hint="Nombre completo"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textColor="#333333"
+            android:textColorHint="#171616"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/usuario_reg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo_reg"
+            app:layout_constraintVertical_bias="0.53" />
 
         <TextView
-            android:id="@+id/logo_is"
-            android:layout_width="245dp"
-            android:layout_height="173dp"
+            android:id="@+id/logo_reg"
+            android:layout_width="120dp"
+            android:layout_height="71dp"
+            android:layout_marginTop="335dp"
             android:background="@drawable/logosinfondo"
             android:text=""
-            android:layout_marginTop="530dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.518"
+            app:layout_constraintHorizontal_bias="0.499"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
