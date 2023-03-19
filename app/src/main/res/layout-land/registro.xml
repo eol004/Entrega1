@@ -40,7 +40,7 @@
             android:textColor="#333333"
             android:textColorHint="#171616"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/fcontra_reg"
+            app:layout_constraintBottom_toTopOf="@+id/contra_reg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
